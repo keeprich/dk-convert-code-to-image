@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alphabets Learning Game</title>
+  <style>
+    .bubble {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px;
+      border: 2px solid black;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <h1>Alphabets Learning Game</h1>
+  <div id="game-container"></div>
+
+  <script>
+    // Remaining JavaScript code remains the same as in the previous example
+    // ...
+  
+
+  
+    // Array of alphabets
+    const alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    // Array of three-letter words with a missing letter
+    const words = [
+      { word: 'CAT', missingIndex: 2 },
+      { word: 'DOG', missingIndex: 1 },
+      { word: 'HEN', missingIndex: 0 },
+      { word: 'PIG', missingIndex: 1 },
+      { word: 'SUN', missingIndex: 2 },
+    ];
+
+    // Shuffle the array randomly
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // Create alphabet bubbles
+    function createBubbles() {
+      const container = document.getElementById('game-container');
+      shuffleArray(alphabets);
+
+      alphabets.forEach((alphabet) => {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.textContent = alphabet;
+        bubble.addEventListener('click', () => checkAnswer(alphabet));
+        container.appendChild(bubble);
+      });
+    }
+
+    // Create word with a missing letter
+    function createWord() {
+      const container = document.getElementById('game-container');
+      shuffleArray(words);
+
+      const word = words[0];
+      const missingLetter = word.word[word.missingIndex];
+
+      const wordElement = document.createElement('div');
+      wordElement.classList.add('bubble');
+      wordElement.textContent = word.word.replace(missingLetter, '_');
+      wordElement.addEventListener('click', () => checkAnswer(missingLetter));
+      container.appendChild(wordElement);
+    }
+
+    // Check if the selected letter is correct
+    function checkAnswer(selectedLetter) {
+      const container = document.getElementById('game-container');
+      const children = container.children;
+
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        if (child.textContent === selectedLetter) {
+          child.style.backgroundColor = 'green';
+          child.style.color = 'white';
+          child.style.border = 'none';
+          child.removeEventListener('click', checkAnswer);
+        } else {
+          child.style.backgroundColor = 'red';
+          child.style.color = 'white';
+          child.style.border = 'none';
+          child.removeEventListener('click', checkAnswer);
+        }
+      }
+    }
+
+
+// Function to generate random floating animations
+function generateRandomAnimation() {
+      const bubbles = document.querySelectorAll('.bubble');
+      bubbles.forEach((bubble) => {
+        const randomDelay = Math.random() * 3; // Random delay between 0 and 3 seconds
+        const randomDuration = (Math.random() * 2) + 1; // Random duration between 1 and 3 seconds
+        const randomDirection = Math.random() < 0.5 ? '-' : ''; // Randomly choose forward or backward direction
+
+        bubble.style.animationDelay = `${randomDelay}s`;
+        bubble.style.animationDuration = `${randomDuration}s`;
+        bubble.style.animationDirection = `${randomDirection}alternate`;
+      });
+    }
+
+    // Initialize the game
+    function initGame() {
+      createBubbles();
+      createWord();
+      generateRandomAnimation(); // Call the function to generate random floating animations
+    }
+
+    initGame();
+  </script>
+</body>
+</html>
+
+
+    <!-- // #''''''''''''''''
+    // Initialize the game -->
+
+
+    <!-- function initGame() {
+      createBubbles();
+      createWord();
+    }
+
+    initGame();
+  </script>
+</body>
+</html>
+ -->

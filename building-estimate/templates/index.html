@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Block Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">House Block Calculator</h1>
+        <form method="post" action="/">
+            <div class="mb-3">
+                <label class="form-label">Room Width (m):</label>
+                <input type="text" name="room_width" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Room Length (m):</label>
+                <input type="text" name="room_length" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Block Width (m):</label>
+                <input type="text" name="block_width" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Block Length (m):</label>
+                <input type="text" name="block_length" class="form-control" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </div>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                Number of blocks needed: {{ result }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
